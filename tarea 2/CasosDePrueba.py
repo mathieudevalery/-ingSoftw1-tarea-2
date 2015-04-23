@@ -13,7 +13,7 @@ from datetime import *
 class PruebaReserva(unittest.TestCase):
     
     def testtarifaNegativa(self):
-        #Caso de prueba para tarifas negativas2
+        #Caso de prueba para tarifas negativas23
         pruebaTarifa = Tarifa(-1,-2)
         reservaInicial = datetime(2015,1,2,10,40,0,0)
         reservaFinal = datetime(2015,1,2,11,0,0,0)
