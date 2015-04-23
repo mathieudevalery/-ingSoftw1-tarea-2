@@ -36,7 +36,7 @@ class PruebaReserva(unittest.TestCase):
         reservaFinal = datetime(2015,1,9,10,40,0,0)
         tiempoDeReserva = [reservaInicial,reservaFinal]
         precio = calcularPrecio(pruebaTarifa,tiempoDeReserva)
-        self.assertEqual(precio, ((3*7200)/60)+((2880*5)/60))
+        self.assertEqual(precio,((3*7200)/60)+((2880*5)/60))
     
     def testReservacionExcedio7d(self):
         #Caso de prueba para verificar que la reservacion es mayor a 7 dias
