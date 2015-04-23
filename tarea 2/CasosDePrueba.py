@@ -2,7 +2,7 @@
 Created on 23/4/2015
 
 @author: Mathieu De Valery 10-10193
-@author: Oscar Guillen 
+@author: Oscar Guillen 11-11264
 '''
 
 import unittest
