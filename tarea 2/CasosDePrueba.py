@@ -104,23 +104,25 @@ class PruebaReserva(unittest.TestCase):
         
     def testReservacionTarifaAlta(self):
         #Caso de prueba para verificar una reservacion con una tarifa alta.
-        # en este caso con la tarifa de fin de semana.
-        pruebaTarifa = Tarifa(3,10000000000)
+        # en este caso con la tarifa de semana y fin de semana.
+        pruebaTarifa = Tarifa(2**31-1,2**32-1)
         reservaInicial = datetime(2015,4,25,10,40,0,0)
-        reservaFinal = datetime(2015,4,26,10,40,0,0)
+        reservaFinal = datetime(2015,4,28,10,40,0,0)
         tiempoDeReserva = [reservaInicial,reservaFinal]
         precio = calcularPrecio(pruebaTarifa,tiempoDeReserva)
-        self.assertEqual(precio, Decimal((10000000000*1440)/60))
+        self.assertEqual(precio, round(Decimal(((((2**31)-1)*2080)/60)+((((2**32)-1)*2240)/60)),2))
+        
+        
         
     def testReservacionTarifaBaja(self):
         #Caso de prueba para verificar una reservacion con tarifa muy baja.
-        #EN este caso con tarifa de fin de semana.
-        pruebaTarifa = Tarifa(3,0.00000005)
+        #en este caso con tarifa de fsemana y fin de semana.
+        pruebaTarifa = Tarifa(0.00000003,0.00000005)
         reservaInicial = datetime(2015,4,25,10,40,0,0)
-        reservaFinal = datetime(2015,4,26,10,40,0,0)
+        reservaFinal = datetime(2015,4,28,10,40,0,0)
         tiempoDeReserva = [reservaInicial,reservaFinal]
         precio = calcularPrecio(pruebaTarifa,tiempoDeReserva)
-        self.assertEqual(precio, round(Decimal((0.00000005*1440)/60),2))   
+        self.assertEqual(precio, round(Decimal((((0.00000005)*2239)/60)+(((0.00000003)*2079)/60)),2))   
         
             
         
