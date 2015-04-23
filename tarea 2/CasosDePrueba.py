@@ -14,15 +14,33 @@ from decimal import Decimal
 class PruebaReserva(unittest.TestCase):
     
     def testtarifaNegativa(self):
-        #Caso de prueba para tarifas negativas23
+        #Caso de prueba para tarifas negativas
         pruebaTarifa = Tarifa(-1,-2)
         reservaInicial = datetime(2015,1,2,10,40,0,0)
         reservaFinal = datetime(2015,1,2,11,0,0,0)
         tiempoDeReserva = [reservaInicial,reservaFinal]
         self.assertRaises(Exception,calcularPrecio, pruebaTarifa, tiempoDeReserva)
         
+    def testtarifaMenor15min(self):
+        #Caso de prueba para tarifas menor de 15 min
+        pruebaTarifa = Tarifa(3,5)
+        reservaInicial = datetime(2015,1,2,10,40,0,0)
+        reservaFinal = datetime(2015,1,2,10,45,0,0)
+        tiempoDeReserva = [reservaInicial,reservaFinal]
+        self.assertRaises(Exception,calcularPrecio, pruebaTarifa, tiempoDeReserva) 
+        
+    def testtarifaFechainiMenorFechafin(self):
+        #Caso de prueba para tarifas con fecha incial mayor a la fecha final.
+        pruebaTarifa = Tarifa(3,5)
+        reservaInicial = datetime(2015,1,2,10,40,0,0)
+        reservaFinal = datetime(2015,1,2,10,20,0,0)
+        tiempoDeReserva = [reservaInicial,reservaFinal]
+        self.assertRaises(Exception,calcularPrecio, pruebaTarifa, tiempoDeReserva)        
+        
+    
+        
     def testtarifa15min(self):
-        #Caso de prueba para tarifas con tiempo 15 minutos
+        #Caso de prueba para tarifas con tiempo 15 minutos.
         pruebaTarifa = Tarifa(1,5)
         reservaInicial = datetime(2015,1,2,10,40,0,0)
         reservaFinal = datetime(2015,1,2,10,55,0,0)
