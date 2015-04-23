@@ -126,8 +126,27 @@ class PruebaReserva(unittest.TestCase):
         
             
         
+    #### CASOS ESQUINAS ####
+    
+    def testReservacionTarifaAltayBaja(self):
+        #Caso de prueba para verificar una reservacion con tarifa muy baja.
+        #y muy altas a la vez.
+        pruebaTarifa = Tarifa(0.00000003,2**31-1)
+        reservaInicial = datetime(2015,4,25,10,40,0,0)
+        reservaFinal = datetime(2015,4,28,10,40,0,0)
+        tiempoDeReserva = [reservaInicial,reservaFinal]
+        precio = calcularPrecio(pruebaTarifa,tiempoDeReserva)
+        self.assertEqual(precio, round(Decimal(((((2**31)-1)*2240)/60)+(((0.00000003)*2080)/60)),2))
         
-        
+    
+    def testReservacionTarifaMuyBajas(self):
+        #Caso de prueba para verificar una reservacion con tarifa muy baja.
+        #en este caso con tarifa de fsemana y fin de semana.
+        pruebaTarifa = Tarifa(-0.00000003,-0.00000005)
+        reservaInicial = datetime(2015,4,25,10,40,0,0)
+        reservaFinal = datetime(2015,4,28,10,40,0,0)
+        tiempoDeReserva = [reservaInicial,reservaFinal]
+        self.assertRaises(Exception, calcularPrecio, pruebaTarifa,tiempoDeReserva)
 
 
 
