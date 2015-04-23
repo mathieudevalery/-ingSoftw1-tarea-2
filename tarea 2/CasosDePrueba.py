@@ -29,7 +29,7 @@ class PruebaReserva(unittest.TestCase):
         tiempoDeReserva = [reservaInicial,reservaFinal]
         self.assertRaises(Exception,calcularPrecio, pruebaTarifa, tiempoDeReserva) 
         
-    def testtarifaFechainiMenorFechafin(self):
+    def testtarifaFechainiMayorFechafin(self):
         #Caso de prueba para tarifas con fecha incial mayor a la fecha final.
         pruebaTarifa = Tarifa(3,5)
         reservaInicial = datetime(2015,1,2,10,40,0,0)
